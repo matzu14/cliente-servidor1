@@ -1,17 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-var Zoombie = require("../models/zombie");
+var zoombies = require("../models/zoombies");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Zombie.find().exec(function(error, zombies){
+  zoombies.find().exec(function(error, zoombies){
     if(!error){
-      console.log(zombies);
-      res.render('index', { title: 'C/S Course' });
+      console.log(zoombies);
+      res.render('index', { title: 'C/S Course', coleccion: zoombies});
     }
   })
-  
+
 });
 
 router.get('/prueba', function(req, res){
