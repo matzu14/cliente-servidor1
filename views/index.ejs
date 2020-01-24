@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-  </head>
-  <body>
+<% include _header%>
+
     <h1><%= title %></h1>
     <p>Welcome to
       <%= title %>
     </p>
+    
     <h2> Lista de zombies </h2>
     
     <Table class="table table-striped">
@@ -25,9 +20,9 @@
         coleccion.forEach(function(coleccion){
       %>
       <tr>
-        <td> <%= zombie.name %> </td>
-        <td> <%= zombie.email %> </td>
-        <td> <%= zombie.type %> </td>
+        <td> <%= zombies.name %> </td>
+        <td> <%= zombies.email %> </td>
+        <td> <%= zombies.type %> </td>
       </tr>
 
       <%
@@ -35,6 +30,4 @@
       %>
       
 
-  
-  </body>
-</html>
+<% include _footer %>
