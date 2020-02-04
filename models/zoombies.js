@@ -6,6 +6,6 @@ var modelSchema = mongoose.Schema({
     type:String
 });
 
-var Zombie = mongoose.model("zombies", modelSchema);
-mongoose.set('debug', true);
-module.exports = Zombie;
+
+var zombie = mongoose.model("zoombies", modelSchema);
+module.exports = zombie;

@@ -13,11 +13,11 @@
       <th>Email</th>
       <th>Tipo</th>
       </tr>
-    </Table>
+    
 
     <% 
       if(coleccion){
-        coleccion.forEach(function(coleccion){
+        coleccion.forEach(function(zombies){
       %>
       <tr>
         <td> <%= zombies.name %> </td>
@@ -28,6 +28,6 @@
       <%
         });}
       %>
-      
+    </Table>
 
 <% include _footer %>

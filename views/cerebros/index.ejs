@@ -1,0 +1,28 @@
+<% include _header%>
+    
+    <h2> Lista de cerebros </h2>
+    
+    <Table class="table table-striped">
+      <thead>
+        <tr>
+            <th scope="col">iq</th>
+            <th scope="col">flavor</th>
+            <th scope="col">description</th>
+        </tr>
+      </thead>
+
+    <% 
+      if(coleccion){
+        coleccion.forEach(function(cerebros){
+      %>
+      <tbody>
+          <td> <%= cerebros.iq %> </td>
+          <td> <%= cerebros.flavor %> </td>
+          <td> <%= cerebros.description %> </td>
+      </tbody>
+      <%
+        });}
+      %>
+    </Table>  
+
+<% include _footer %>

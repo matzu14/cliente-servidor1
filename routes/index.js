@@ -2,16 +2,61 @@ var express = require('express');
 var router = express.Router();
 
 var zoombies = require("../models/zoombies");
+var cerebros = require("../models/cerebros");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  zoombies.find().exec(function(error, zoombies){
+  zoombies.find().exec(function(error, zombie){
     if(!error){
-      console.log(zoombies);
-      res.render('index', { title: 'C/S Course', coleccion: zoombies});
+      console.log(zombie);
+      res.render('index', { title: 'C/S Course', coleccion: zombie});
     }
   })
 
+});
+
+router.get('/cerebros', function(req, res, next) {
+  cerebros.find().exec(function(error, cerebros){
+    if(!error){
+      console.log(cerebros);
+      res.render('cerebros/index', { title: 'Delichus', coleccion: cerebros});
+    }
+  })
+
+});
+
+
+router.get('/zombies/add', function(req, res){
+  res.render('add');
+});
+
+router.post('/zombies/new', function(req, res){
+  var zombie = req;
+  var data = req.body;
+
+  var nuevoZombie = new zoombies({
+    name: data.name,
+    email: data.email,
+    type: data.type
+
+  });
+
+  if(data.name=='')
+  {
+    res.render('add');
+  }
+  else
+    if(data.email==''){
+    res.render('add');
+  }
+  else
+    if(data.type=='')
+    { res.sendStatus(404);
+    }
+  else{
+  nuevoZombie.save().then(function(){
+    res.send("se agrego un nuevo zombie!")
+  });}
 });
 
 router.get('/prueba', function(req, res){
