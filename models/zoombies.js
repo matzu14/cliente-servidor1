@@ -8,7 +8,7 @@ var modelSchema = mongoose.Schema({
     },
     email:{
         type:String,
-        require:[true, "El correo electronico es obligatorio"],
+        require:["El correo electronico es obligatorio", true],
     },
     type:{
         type: String,

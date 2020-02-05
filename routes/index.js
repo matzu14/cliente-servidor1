@@ -27,7 +27,7 @@ router.get('/cerebros', function(req, res, next) {
 
 
 router.get('/zombies/add', function(req, res){
-  res.render('add');
+  res.render('add', {mensajeError:""});
 });
 
 router.post('/zombies/new', function(req, res){
@@ -56,9 +56,10 @@ router.post('/zombies/new', function(req, res){
 nuevoZombie.save(function(error){
   if(error)
   {
-    res.send(error);
+    var mensaje = error.message;
+    res.render('add', {mensajeError: mensaje, mensajeExito:''});
   }else{
-    res.send("Se agrego un nuevo zombie");
+    res.render('add', {mensajeError:'', mensajeExito:'se agrego un nuevo zombie'})
   }
  })
 });

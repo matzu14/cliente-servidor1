@@ -15,8 +15,18 @@
                 <label for="">Tipo</label>
                 <input type="text" class="form-control" name="type">
             </div>
+            <% if(mensajeError.length > 0){ %>
+            <div class="alert alert-danger">
+                <%= mensajeError %>
+            </div>
+            <% } %>
+            <% if(mensajeExito.length > 0) {%>
+                <div class="alert alert-danger">
+                    <%= mensajeExito %>
+                </div>
+            <% } %>
             <button class="btn btn-primary">
-                AÑADIR
+                Añadir zombie
             </button>
         </form>
         
