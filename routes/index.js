@@ -41,22 +41,26 @@ router.post('/zombies/new', function(req, res){
 
   });
 
-  if(data.name=='')
+//   nuevoZombie.save(function(error){
+//     if(error)
+//     {
+//       res.send(error);
+//     }else{
+//       res.send("Se agrego un nuevo zombie");
+//     }
+//    }).then(function(){
+//      res.send("se agrego un nuevo zombie!")
+//    });
+// });
+
+nuevoZombie.save(function(error){
+  if(error)
   {
-    res.render('add');
+    res.send(error);
+  }else{
+    res.send("Se agrego un nuevo zombie");
   }
-  else
-    if(data.email==''){
-    res.render('add');
-  }
-  else
-    if(data.type=='')
-    { res.sendStatus(404);
-    }
-  else{
-  nuevoZombie.save().then(function(){
-    res.send("se agrego un nuevo zombie!")
-  });}
+ })
 });
 
 router.get('/prueba', function(req, res){
