@@ -27,7 +27,7 @@ router.get('/cerebros', function(req, res, next) {
 
 
 router.get('/zombies/add', function(req, res){
-  res.render('add', {mensajeError:""});
+  res.render('add', {mensajeError:"", mensajeExito:''});
 });
 
 router.post('/zombies/new', function(req, res){
@@ -41,18 +41,6 @@ router.post('/zombies/new', function(req, res){
 
   });
 
-//   nuevoZombie.save(function(error){
-//     if(error)
-//     {
-//       res.send(error);
-//     }else{
-//       res.send("Se agrego un nuevo zombie");
-//     }
-//    }).then(function(){
-//      res.send("se agrego un nuevo zombie!")
-//    });
-// });
-
 nuevoZombie.save(function(error){
   if(error)
   {
@@ -63,6 +51,33 @@ nuevoZombie.save(function(error){
   }
  })
 });
+
+router.get('/cerebros/add', function(req, res){
+  res.render('cerebros/add', {mensajeError:"", mensajeExito:''});
+});
+
+router.post('/cerebros/new', function(req, res){
+  var cerebro = req;
+  var data = req.body;
+
+  var nuevoCerebro = new cerebros({
+    iq: data.iq,
+    flavor: data.flavor,
+    description: data.description
+
+  });
+  
+  nuevoCerebro.save(function(error){
+  if(error)
+  {
+    var mensaje = error.message;
+    res.render('cerebros/add', {mensajeError: mensaje, mensajeExito:''});
+  }else{
+    res.render('cerebros/add', {mensajeError:'', mensajeExito:'se agrego un nuevo cerebro'})
+  }
+ })
+});
+
 
 router.get('/prueba', function(req, res){
   res.send('<h1> Esto es una prueba <h1>');
