@@ -25,8 +25,8 @@
         <td> <%= zombies.email %> </td>
         <td> <%= zombies.type %> </td>
         <td>
-          <a href="/zombies/edit/<%= zombies.id %>"> <i class="fas fa-edit" title=Actualizar> </i></a>
-          <i class="fas fa-trash" title="Eliminar"></i>
+          <a href="/zombies/edit/<%= zombies.id %>"> <i class="fas fa-edit text-success" title=Editar> </i></a>
+          <a href="/zombies/delete/<%= zombies.id %>"><i class="fas fa-trash text-danger" title="Eliminar"></i></a>
         </td>
       </tr>
 

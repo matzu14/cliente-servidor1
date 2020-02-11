@@ -78,6 +78,12 @@ router.post('/cerebros/new', function(req, res){
  })
 });
 
+router.get('/zombies/delete/:id', async function(req, res){
+  var zombie = await zoombies.findById(req.params.id);
+  
+  res.render('delete', {zombie: zombie});
+  });
+
 router.get('/zombies/edit/:id', async function(req, res){
   var zombie = await zoombies.findById(req.params.id);
   
@@ -88,12 +94,13 @@ router.put('/zombies/edit/:id', async function(req, res){
   try
   {
     var zombie = await zoombies.findById(req.params.id);
+
     zombie.name = req.body.name;
     zombie.email = req.body.email;
     zombie.type = req.body.type;
 
     await zombie.save();
-    res.redirect('/')
+    res.redirect('/');
   }
   catch (e)
   {
@@ -101,6 +108,21 @@ router.put('/zombies/edit/:id', async function(req, res){
   }
 
 });
+
+router.delete('/zombies/delete/:id', async function(req, res){
+try
+{
+  var zombie = await zoombies.findById(req.params.id);
+  zombie.remove();
+
+  res.redirect('/');
+}
+catch (e)
+{
+  res.render('/zombies/delete/:id', {mensajeError:'No se ha podido eliminar'});
+}
+})
+
 
 router.get('/prueba', function(req, res){
   res.send('<h1> Esto es una prueba <h1>');
