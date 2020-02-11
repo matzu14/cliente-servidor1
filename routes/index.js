@@ -78,6 +78,29 @@ router.post('/cerebros/new', function(req, res){
  })
 });
 
+router.get('/zombies/edit/:id', async function(req, res){
+  var zombie = await zoombies.findById(req.params.id);
+  
+  res.render('edit', {zombie: zombie});
+});
+
+router.put('/zombies/edit/:id', async function(req, res){
+  try
+  {
+    var zombie = await zoombies.findById(req.params.id);
+    zombie.name = req.body.name;
+    zombie.email = req.body.email;
+    zombie.type = req.body.type;
+
+    await zombie.save();
+    res.redirect('/')
+  }
+  catch (e)
+  {
+   res.render('edit', {zombie: zombie}) 
+  }
+
+});
 
 router.get('/prueba', function(req, res){
   res.send('<h1> Esto es una prueba <h1>');

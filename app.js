@@ -3,6 +3,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var methodOverride = require('method-override');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -16,12 +17,14 @@ mongoose.connect("mongodb://localhost:27017/Zoombie_schooA");
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // 
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); //
+app.use('/css', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/'));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

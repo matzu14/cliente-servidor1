@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+td
+{
+  margin: 0 4px;
+  cursor: pointer;
+}

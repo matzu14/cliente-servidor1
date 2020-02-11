@@ -12,6 +12,7 @@
       <th>Nombre</th>
       <th>Email</th>
       <th>Tipo</th>
+      <th>Acciones</th>
       </tr>
     
 
@@ -23,6 +24,10 @@
         <td> <%= zombies.name %> </td>
         <td> <%= zombies.email %> </td>
         <td> <%= zombies.type %> </td>
+        <td>
+          <a href="/zombies/edit/<%= zombies.id %>"> <i class="fas fa-edit" title=Actualizar> </i></a>
+          <i class="fas fa-trash" title="Eliminar"></i>
+        </td>
       </tr>
 
       <%
