@@ -2,7 +2,7 @@
 
 <div class="row containter">
     <div class="col-md-12">
-        <form action="/cerebros/edit/<%= cerebros.id  %>?_method=PUT" method="POST">
+        <form action="/zombies/edit/<%= zombie.id  %>?_method=PUT" method="POST">
             <div class="form-group">
                 <label for="">Nombre</label>
                 <input type="text" class="form-control" name="name" value="<%= zombie.name %>">
@@ -16,6 +16,17 @@
                 <input type="text" class="form-control" name="type" value="<%= zombie.type %>">
             </div>
             
+            <% if(mensajeError.length > 0){ %>
+                <div class="alert alert-danger">
+                    <%= mensajeError %>
+                </div>
+                <% } %>
+                <% if(mensajeExito.length > 0) {%>
+                    <div class="alert alert-danger">
+                        <%= mensajeExito %>
+                    </div>
+                <% } %>
+
             <button class="btn btn-primary"> <i class="fas fa-skull"></i> Editar zombie
             </button>
         </form>

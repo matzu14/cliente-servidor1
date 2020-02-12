@@ -63,7 +63,7 @@ router.get('/zombies/delete/:id', async function(req, res){
 router.get('/zombies/edit/:id', async function(req, res){
   var zombie = await zoombies.findById(req.params.id);
   
-  res.render('edit', {zombie: zombie});
+  res.render('edit', {zombie: zombie, mensajeError:"", mensajeExito:''});
 });
 
 router.put('/zombies/edit/:id', async function(req, res){
@@ -80,7 +80,8 @@ router.put('/zombies/edit/:id', async function(req, res){
   }
   catch (e)
   {
-   res.render('edit', {zombie: zombie}) 
+    var mensaje = e;
+    res.render('edit', {zombie: zombie, mensajeError:mensaje, mensajeExito:'' }) 
   }
 
 });
@@ -122,7 +123,7 @@ router.post('/cerebros/new', function(req, res){
     var mensaje = error.message;
     res.render('cerebros/add', {mensajeError: mensaje, mensajeExito:''});
   }else{
-    res.render('cerebros/add', {mensajeError:'', mensajeExito:'se agrego un nuevo cerebro'})
+    res.render('cerebros/add', {mensajeError:'', mensajeExito:'se agregó correctamente'})
   }
  })
 });
@@ -144,11 +145,17 @@ router.get('/cerebros/delete/:id', async function(req, res){
     }
     catch (e)
     {
+      var e;
       res.render('/cerebros/delete/:id', {mensajeError:'No se ha podido eliminar'});
     }
     })
 
 //update
+router.get('/cerebros/edit/:id', async function(req, res){
+  var cerebro = await cerebros.findById(req.params.id);
+  
+  res.render('cerebros/edit', {cerebro: cerebro, mensajeError:"", mensajeExito:''});
+});
 
 router.put('/cerebros/edit/:id', async function(req, res){
   try
@@ -160,11 +167,12 @@ router.put('/cerebros/edit/:id', async function(req, res){
     cerebro.description = req.body.description;
 
     await cerebro.save();
-    res.redirect('/');
+    res.redirect('/cerebros');
   }
   catch (e)
   {
-   res.render('/cerebros/edit/:id', {cerebros: cerebro}) 
+    var mensaje = e;
+   res.render('cerebros/edit', {cerebro: cerebro, mensajeError: mensaje, mensajeExito:''}) 
   }
 
 });
