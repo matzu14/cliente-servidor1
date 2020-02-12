@@ -80,8 +80,7 @@ router.put('/zombies/edit/:id', async function(req, res){
   }
   catch (e)
   {
-    var mensaje = e;
-    res.render('edit', {zombie: zombie, mensajeError:mensaje, mensajeExito:'' }) 
+    res.render('edit', {zombie: zombie, mensajeError:e.message, mensajeExito:'' }) 
   }
 
 });
@@ -145,7 +144,6 @@ router.get('/cerebros/delete/:id', async function(req, res){
     }
     catch (e)
     {
-      var e;
       res.render('/cerebros/delete/:id', {mensajeError:'No se ha podido eliminar'});
     }
     })
@@ -168,11 +166,12 @@ router.put('/cerebros/edit/:id', async function(req, res){
 
     await cerebro.save();
     res.redirect('/cerebros');
+    console.log("si se guardo")
   }
   catch (e)
   {
-    var mensaje = e;
-   res.render('cerebros/edit', {cerebro: cerebro, mensajeError: mensaje, mensajeExito:''}) 
+    console.log(e);
+    res.render('cerebros/edit', {cerebro: cerebro, mensajeError: e.message, mensajeExito:''}) 
   }
 
 });
