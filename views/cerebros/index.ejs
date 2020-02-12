@@ -22,9 +22,8 @@
           <td> <%= cerebros.description %> </td>
           
           <td>
-            <i class="fas fa-edit" title="Actualizar"></i>
-            <i class="fas fa-trash" title="Eliminar"></i>
-
+            <a href="/cerebros/edit/<%= cerebros.id %>"> <i class="fas fa-edit text-success" title=Editar> </i></a>
+            <a href="/cerebros/delete/<%= cerebros.id %>"><i class="fas fa-trash text-danger" title="Eliminar"></i></a>
           </td>
       </tbody>
       <%

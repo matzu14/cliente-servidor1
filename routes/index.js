@@ -52,31 +52,7 @@ nuevoZombie.save(function(error){
  })
 });
 
-router.get('/cerebros/add', function(req, res){
-  res.render('cerebros/add', {mensajeError:"", mensajeExito:''});
-});
 
-router.post('/cerebros/new', function(req, res){
-  var cerebro = req;
-  var data = req.body;
-
-  var nuevoCerebro = new cerebros({
-    iq: data.iq,
-    flavor: data.flavor,
-    description: data.description
-
-  });
-  
-  nuevoCerebro.save(function(error){
-  if(error)
-  {
-    var mensaje = error.message;
-    res.render('cerebros/add', {mensajeError: mensaje, mensajeExito:''});
-  }else{
-    res.render('cerebros/add', {mensajeError:'', mensajeExito:'se agrego un nuevo cerebro'})
-  }
- })
-});
 
 router.get('/zombies/delete/:id', async function(req, res){
   var zombie = await zoombies.findById(req.params.id);
@@ -123,6 +99,75 @@ catch (e)
 }
 })
 
+//CRUD cerebros
+//Create
+router.get('/cerebros/add', function(req, res){
+  res.render('cerebros/add', {mensajeError:"", mensajeExito:''});
+});
+
+router.post('/cerebros/new', function(req, res){
+  var cerebro = req;
+  var data = req.body;
+
+  var nuevoCerebro = new cerebros({
+    iq: data.iq,
+    flavor: data.flavor,
+    description: data.description
+
+  });
+  
+  nuevoCerebro.save(function(error){
+  if(error)
+  {
+    var mensaje = error.message;
+    res.render('cerebros/add', {mensajeError: mensaje, mensajeExito:''});
+  }else{
+    res.render('cerebros/add', {mensajeError:'', mensajeExito:'se agrego un nuevo cerebro'})
+  }
+ })
+});
+//delete
+
+router.get('/cerebros/delete/:id', async function(req, res){
+  var cerebro = await cerebros.findById(req.params.id);
+  
+  res.render('cerebros/delete', {cerebro: cerebro});
+  });
+
+  router.delete('/cerebros/delete/:id', async function(req, res){
+    try
+    {
+      var cerebro = await cerebros.findById(req.params.id);
+      cerebro.remove();
+    
+      res.redirect('/cerebros');
+    }
+    catch (e)
+    {
+      res.render('/cerebros/delete/:id', {mensajeError:'No se ha podido eliminar'});
+    }
+    })
+
+//update
+
+router.put('/cerebros/edit/:id', async function(req, res){
+  try
+  {
+    var cerebro = await cerebros.findById(req.params.id);
+
+    cerebro.iq = req.body.iq;
+    cerebro.flavor = req.body.flavor;
+    cerebro.description = req.body.description;
+
+    await cerebro.save();
+    res.redirect('/');
+  }
+  catch (e)
+  {
+   res.render('/cerebros/edit/:id', {cerebros: cerebro}) 
+  }
+
+});
 
 router.get('/prueba', function(req, res){
   res.send('<h1> Esto es una prueba <h1>');
