@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   zoombies.find().exec(function(error, zombie){
     if(!error){
       console.log(zombie);
-      res.render('index', { title: 'C/S Course', coleccion: zombie});
+      res.render('index', { title: 'Lista de zombies', coleccion: zombie});
     }
   })
 
